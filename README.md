@@ -5,23 +5,25 @@
 - 📫 How to reach me, by my email
 
 <div style="display: inline_block"><br>
-  <img align="left" alt="ern-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
-  </div>
-<br/>
-<div align="center">
-    <a href="https://instagram.com/emerson.a.santos" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
-  <a href="https://discord.gg/ernbr" target="_blank"><img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" target="_blank"></a> 
-  <a href = "mailto:emerson.a.dossantos@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
-  <a href="https://www.linkedin.com/in/emerson-santos-b3790935/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
-</div>
-<br/>
-<div align="center">
-  <a href="https://github.com/ernbr">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&include_all_commits=true&count_private=true&hide_rank=true"/>
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/>
+<img align="left" alt="ern-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
 </div>
 
-  ### Now Playing 🎧
+<div align="left">
+<div style="display: inline_block">  
+<a href="https://instagram.com/emerson.a.santos" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
+<a href="https://discord.gg/ernbr" target="_blank"><img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" target="_blank"></a> 
+<a href = "mailto:emerson.a.dossantos@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+<a href="https://www.linkedin.com/in/emerson-santos-b3790935/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+</div>
 
+<br/>
+<div align="left">
+<div style="display: inline_block">  
+<a href="https://github.com/ernbr">
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&include_all_commits=true&count_private=true&hide_rank=true"/>
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/>
+</div>
+
+### Now Playing 🎧
 [![spotify-github-profile](https://spotify-github-profile.vercel.app/api/view?uid=12185111032&cover_image=true&theme=novatorem)](https://github.com/kittinan/spotify-github-profile)
 ---
