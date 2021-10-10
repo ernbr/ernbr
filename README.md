@@ -18,7 +18,7 @@
 <br />
 <div align="center">
 <a href="https://github.com/ernbr">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/><br />
 <img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&hide_rank=true"/><br />
 </div>
 <br />
