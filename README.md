@@ -20,8 +20,8 @@
 <div align="left">
 <div style="display: inline_block">  
 <a href="https://github.com/ernbr">
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernb&show_icons=true&theme=chartreuse-dark&include_all_commits=true&count_private=true&hide_rank=true"/>
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernb&layout=compact&langs_count=7&theme=chartreuse-dark"/>
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&include_all_commits=true&count_private=true&hide_rank=true"/>
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/>
 </div>
 
 ### Now Playing 🎧
