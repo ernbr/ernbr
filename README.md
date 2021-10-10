@@ -22,13 +22,9 @@
 <img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&hide_rank=true"/>
 <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/>
 </div>
-  
-[![NOMEGIT GitHub stats](https://github-readme-stats.vercel.app/api?username=ernbr)]
-[Ernbr's GitHub stats](https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=radical)
- 
 
 ### Now Playing 🎧
-<img height= "20" src="https://img.shields.io/badge/Spotify-1ED760?&style=for-the-badge&logo=spotify&logoColor=white"/>
+<img height= "60em" src="https://img.shields.io/badge/Spotify-1ED760?&style=for-the-badge&logo=spotify&logoColor=white"/>
 
 [![spotify-github-profile](https://spotify-github-profile.vercel.app/api/view?uid=12185111032&cover_image=true&theme=novatorem)](https://github.com/kittinan/spotify-github-profile)
 ---
