@@ -23,7 +23,15 @@
 <img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&include_all_commits=true&count_private=true&hide_rank=true"/>
 <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/>
 </div>
+  
+  https://github-readme-streak-stats.herokuapp.com/?user={ernbr}
+<img src=https://github-readme-stats.vercel.app/api?ernbr={ernbr}
+[![NOMEGIT GitHub stats](https://github-readme-stats.vercel.app/api?username=ernbr)](https://github.com/ernbr/github-readme-stats)  
+[Ernbr's GitHub stats](https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=radical)
+
 
 ### Now Playing 🎧
+ <img src=https://img.shields.io/badge/Spotify-1ED760?&style=for-the-badge&logo=spotify&logoColor=white>
+
 [![spotify-github-profile](https://spotify-github-profile.vercel.app/api/view?uid=12185111032&cover_image=true&theme=novatorem)](https://github.com/kittinan/spotify-github-profile)
 ---
