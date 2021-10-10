@@ -8,7 +8,7 @@
 <img align="left" alt="ern-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
 </div>
 
-<div align="left">
+<div align="center">
 <div style="display: inline_block">  
 <a href="https://instagram.com/emerson.a.santos" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
 <a weihref="https://discord.gg/ernbr" target="_blank"><img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" target="_blank"></a> 
@@ -16,10 +16,10 @@
 <a href="https://www.linkedin.com/in/emerson-santos-b3790935/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </div>
 <br />
-<div align="left">
+<div align="center">
 <a href="https://github.com/ernbr">
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ernbr&layout=compact&langs_count=7&theme=chartreuse-dark"/>
- <img height="180" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&hide_rank=true"/><br />
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=ernbr&show_icons=true&theme=chartreuse-dark&hide_rank=true"/><br />
 </div>
 <br />
 ### Now Playing 🎧
