@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Personagem Live</title>
+<style>
+  html, body { margin: 0; height: 100%; background: transparent; overflow: hidden;
+               font-family: "Segoe UI", Arial, sans-serif; }
+  body.verde { background: #00ff00; } /* ?fundo=verde para chroma key */
+
+  #palco { position: fixed; right: 30px; bottom: 30px; width: 420px; height: 560px; }
+
+  /* ---------- balão de fala ---------- */
+  #balao {
+    position: absolute; left: 10px; right: 10px; top: 0; min-height: 60px;
+    background: #fff; color: #161823; border-radius: 22px; padding: 16px 20px;
+    font-size: 24px; font-weight: 700; line-height: 1.25; text-align: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3); border: 4px solid #161823;
+    opacity: 0; transform: scale(.6); transform-origin: 50% 100%;
+    transition: opacity .2s, transform .25s cubic-bezier(.3,1.6,.6,1);
+  }
+  #balao::after { content: ""; position: absolute; left: 50%; bottom: -22px; margin-left: -14px;
+    border: 14px solid transparent; border-top: 18px solid #161823; }
+  #balao.on { opacity: 1; transform: scale(1); }
+  #balao.presente { background: #fff2f5; border-color: #fe2c55; }
+
+  /* ---------- personagem ---------- */
+  #boneco { position: absolute; left: 50%; bottom: 0; width: 300px; margin-left: -150px;
+            transform-origin: 50% 100%; }
+  #corpo { animation: respira 2.6s ease-in-out infinite; transform-origin: 150px 330px; }
+  @keyframes respira { 50% { transform: scale(1.02, .98); } }
+
+  .olho { animation: pisca 4.2s infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes pisca { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+
+  #boca { transform-box: fill-box; transform-origin: center; }
+  .falando #boca { animation: fala .18s ease-in-out infinite alternate; }
+  @keyframes fala { from { transform: scaleY(.25); } to { transform: scaleY(1.1); } }
+
+  #bracoD, #bracoE { transform-box: fill-box; }
+  #bracoD { transform-origin: 0% 50%; }
+  #bracoE { transform-origin: 100% 50%; }
+  .acenando #bracoD { animation: aceno .35s ease-in-out 6 alternate; }
+  @keyframes aceno { from { transform: rotate(-20deg); } to { transform: rotate(-75deg); } }
+
+  .pulando { animation: pulo .5s cubic-bezier(.3,0,.5,1) 4; }
+  @keyframes pulo { 0%,100% { transform: translateY(0) scale(1,1); }
+                    15% { transform: translateY(0) scale(1.1,.88); }
+                    50% { transform: translateY(-90px) scale(.95,1.06); } }
+  .pulando #bracoD, .pulando #bracoE, .comemorando #bracoD, .comemorando #bracoE {
+    animation: bracosCima .25s ease-in-out infinite alternate; }
+  @keyframes bracosCima { from { transform: rotate(-60deg); } to { transform: rotate(-100deg); } }
+  .pulando #bracoE, .comemorando #bracoE { animation-name: bracosCimaE; }
+  @keyframes bracosCimaE { from { transform: rotate(60deg); } to { transform: rotate(100deg); } }
+
+  .girando { animation: gira .9s ease-in-out 2; }
+  @keyframes gira { 50% { transform: translateY(-40px) rotate(180deg); } 100% { transform: rotate(360deg); } }
+
+  .comemorando { animation: danca .3s ease-in-out 10 alternate; }
+  @keyframes danca { from { transform: rotate(-8deg); } to { transform: rotate(8deg) translateY(-12px); } }
+
+  .balancando { animation: balanca .4s ease-in-out 6 alternate; }
+  @keyframes balanca { from { transform: translateX(-15px) rotate(-4deg); } to { transform: translateX(15px) rotate(4deg); } }
+
+  .bochecha { opacity: .0; transition: opacity .3s; }
+  .feliz .bochecha { opacity: .7; }
+
+  /* ---------- partículas ---------- */
+  .part { position: absolute; pointer-events: none; font-size: 34px; will-change: transform, opacity; }
+  .confete { width: 12px; height: 18px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div id="balao"></div>
+  <svg id="boneco" viewBox="0 0 300 360" aria-label="personagem">
+    <g id="corpo">
+      <!-- sombra -->
+      <ellipse cx="150" cy="350" rx="95" ry="10" fill="rgba(0,0,0,.25)"/>
+      <!-- antena -->
+      <line x1="150" y1="78" x2="150" y2="40" stroke="#161823" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="150" cy="34" r="14" fill="#fe2c55" stroke="#161823" stroke-width="6"/>
+      <!-- braços -->
+      <g id="bracoE"><path d="M62 210 Q30 210 22 240" stroke="#161823" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <path d="M62 210 Q30 210 22 240" stroke="#25f4ee" stroke-width="12" fill="none" stroke-linecap="round"/></g>
+      <g id="bracoD"><path d="M238 210 Q270 210 278 240" stroke="#161823" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <path d="M238 210 Q270 210 278 240" stroke="#25f4ee" stroke-width="12" fill="none" stroke-linecap="round"/></g>
+      <!-- pés -->
+      <rect x="95" y="315" width="42" height="30" rx="14" fill="#fe2c55" stroke="#161823" stroke-width="6"/>
+      <rect x="163" y="315" width="42" height="30" rx="14" fill="#fe2c55" stroke="#161823" stroke-width="6"/>
+      <!-- corpo -->
+      <rect x="60" y="78" width="180" height="245" rx="80" fill="#25f4ee" stroke="#161823" stroke-width="7"/>
+      <rect x="85" y="105" width="130" height="105" rx="45" fill="#fff" stroke="#161823" stroke-width="6"/>
+      <!-- olhos -->
+      <g class="olho"><ellipse cx="122" cy="150" rx="13" ry="18" fill="#161823"/><circle cx="127" cy="143" r="5" fill="#fff"/></g>
+      <g class="olho"><ellipse cx="178" cy="150" rx="13" ry="18" fill="#161823"/><circle cx="183" cy="143" r="5" fill="#fff"/></g>
+      <ellipse class="bochecha" cx="100" cy="180" rx="12" ry="7" fill="#fe2c55"/>
+      <ellipse class="bochecha" cx="200" cy="180" rx="12" ry="7" fill="#fe2c55"/>
+      <!-- boca -->
+      <path id="boca" d="M128 182 Q150 205 172 182 Z" fill="#161823"/>
+      <!-- coração na barriga -->
+      <path d="M150 268 l-20 -20 a12 12 0 0 1 20 -14 a12 12 0 0 1 20 14 z" fill="#fe2c55" stroke="#161823" stroke-width="5"/>
+    </g>
+  </svg>
+</div>
+
+<script>
+  // Cada tipo de evento vira uma reação do personagem.
+  const reacoes = {
+    entrou:       { anim: "acenando",    feliz: false, part: "👋", n: 3 },
+    presente:     { anim: "pulando",     feliz: true,  part: "confete", n: 60 },
+    seguiu:       { anim: "girando",     feliz: true,  part: "⭐", n: 14 },
+    compartilhou: { anim: "balancando",  feliz: true,  part: "🔁", n: 6 },
+    curtiu:       { anim: "comemorando", feliz: true,  part: "❤️", n: 18 },
+    comentario:   { anim: "",            feliz: false, part: "💬", n: 2 },
+    sistema:      { anim: "acenando",    feliz: true,  part: "✨", n: 10 },
+  };
+  const animClasses = ["acenando", "pulando", "girando", "comemorando", "balancando"];
+
+  const params = new URLSearchParams(location.search);
+  if (params.get("fundo") === "verde") document.body.classList.add("verde");
+  // ?entradas=nao -> não reage a quem entra (live cheia)
+  const ignorarEntradas = params.get("entradas") === "nao";
+
+  const palco = document.getElementById("palco");
+  const boneco = document.getElementById("boneco");
+  const balao = document.getElementById("balao");
+
+  let fila = [], ocupado = false, ultimo = 0;
+
+  function particulas(tipo, n) {
+    const cores = ["#fe2c55", "#25f4ee", "#ffd23f", "#7cff6b", "#ffffff"];
+    for (let i = 0; i < n; i++) {
+      const p = document.createElement("div");
+      p.className = "part" + (tipo === "confete" ? " confete" : "");
+      if (tipo === "confete") p.style.background = cores[i % cores.length];
+      else p.textContent = tipo;
+      p.style.left = 210 + (Math.random() - .5) * 120 + "px";
+      p.style.top = 330 + "px";
+      palco.append(p);
+      const dx = (Math.random() - .5) * 520, dy = -200 - Math.random() * 330;
+      const rot = (Math.random() - .5) * 720;
+      p.animate([
+        { transform: "translate(0,0) rotate(0)", opacity: 1 },
+        { transform: `translate(${dx}px, ${dy}px) rotate(${rot}deg)`, opacity: 1, offset: .6 },
+        { transform: `translate(${dx * 1.2}px, ${dy + 260}px) rotate(${rot * 1.5}deg)`, opacity: 0 },
+      ], { duration: 1800 + Math.random() * 900, easing: "cubic-bezier(.2,.7,.4,1)", delay: Math.random() * 300 })
+        .onfinish = () => p.remove();
+    }
+  }
+
+  function reagir(ev) {
+    const r = reacoes[ev.tipo] || reacoes.comentario;
+    ocupado = true;
+    // duração ~ tempo que a voz leva para ler o texto
+    const dur = Math.min(7000, Math.max(2200, ev.texto.length * 75));
+
+    balao.textContent = ev.texto;
+    balao.className = "on " + ev.tipo;
+    boneco.classList.remove(...animClasses);
+    void boneco.offsetWidth; // reinicia a animação
+    if (r.anim) boneco.classList.add(r.anim);
+    boneco.classList.add("falando");
+    boneco.classList.toggle("feliz", r.feliz);
+    particulas(r.part, r.n);
+
+    setTimeout(() => {
+      boneco.classList.remove("falando", "feliz", ...animClasses);
+      balao.className = "";
+      setTimeout(() => { ocupado = false; proximo(); }, 350);
+    }, dur);
+  }
+
+  function proximo() {
+    if (ocupado || !fila.length) return;
+    // presentes e seguidores furam a fila
+    let i = fila.findIndex(e => e.tipo === "presente" || e.tipo === "seguiu");
+    if (i < 0) i = 0;
+    const [ev] = fila.splice(i, 1);
+    reagir(ev);
+  }
+
+  async function buscar() {
+    try {
+      const r = await fetch("/eventos?desde=" + ultimo);
+      for (const ev of await r.json()) {
+        ultimo = Math.max(ultimo, ev.id);
+        if (ignorarEntradas && ev.tipo === "entrou") continue;
+        fila.push(ev);
+      }
+      // fila muito grande: descarta as entradas mais antigas
+      while (fila.length > 8) {
+        const j = fila.findIndex(e => e.tipo === "entrou" || e.tipo === "curtiu");
+        fila.splice(j < 0 ? 0 : j, 1);
+      }
+      proximo();
+    } catch (e) {}
+    setTimeout(buscar, 600);
+  }
+  buscar();
+</script>
+</body>
+</html>

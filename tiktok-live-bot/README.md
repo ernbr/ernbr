@@ -67,6 +67,20 @@ No **TikTok LIVE Studio** ou **OBS**: adicione uma fonte **Navegador / Link**
 com o endereço `http://localhost:8765`, tamanho 1080x1920. O fundo é
 transparente; os cartões aparecem no canto inferior esquerdo.
 
+### 🤖 Personagem animado
+Adicione outra fonte **Navegador** com `http://localhost:8765/personagem`.
+Um boneco fica no canto inferior direito e reage a cada evento com um balão de fala:
+acena para quem entra, pula e solta confete com presente, gira com novo seguidor,
+dança com curtidas e mexe a boca enquanto "fala".
+- `?fundo=verde` → fundo verde para chroma key (se o programa não aceitar transparência).
+- `?entradas=nao` → não reage a quem entra (live cheia).
+
+### 🎙️ Voz do bot direto na live (sem passar pelo microfone)
+No **TikTok LIVE Studio** ou **OBS**, adicione uma fonte de **áudio do sistema /
+captura de áudio do desktop**. A voz do bot entra limpa na transmissão, mesmo com
+fone de ouvido. No celular isso não é possível: lá a voz precisa sair pelo
+alto-falante para o microfone captar.
+
 ### Opções
 - `--sem-voz` → só overlay, sem falar.
 - `--porta 9000` → muda a porta do overlay.

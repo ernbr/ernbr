@@ -104,6 +104,9 @@ class Overlay:
                         novos = [e for e in overlay.eventos if e["id"] > desde]
                     corpo = json.dumps(novos).encode()
                     tipo = "application/json"
+                elif self.path.startswith("/personagem"):
+                    corpo = (PASTA / "personagem.html").read_bytes()
+                    tipo = "text/html; charset=utf-8"
                 else:
                     corpo = (PASTA / "overlay.html").read_bytes()
                     tipo = "text/html; charset=utf-8"
@@ -115,7 +118,8 @@ class Overlay:
 
         srv = ThreadingHTTPServer(("127.0.0.1", porta), Handler)
         threading.Thread(target=srv.serve_forever, daemon=True).start()
-        print(f"[overlay] http://localhost:{porta}  (adicione no OBS como fonte Navegador)")
+        print(f"[overlay]    http://localhost:{porta}  (cartões)")
+        print(f"[personagem] http://localhost:{porta}/personagem  (boneco animado)")
 
     def mostrar(self, tipo: str, texto: str):
         with self.trava:
