@@ -15,6 +15,7 @@ import argparse
 import json
 import queue
 import random
+import re
 import shutil
 import subprocess
 import threading
@@ -179,7 +180,8 @@ class Anfitriao:
         print(f"[{time.strftime('%H:%M:%S')}] comentario   {nome}: {texto}")
         t = texto.lower()
         for chave, resposta in mensagens.RESPOSTAS_COMENTARIO.items():
-            if chave in t:
+            # palavra inteira: "oi" não casa com "depois"
+            if re.search(r"\b" + re.escape(chave) + r"\b", t):
                 self._responder("comentario", [resposta], nome=nome)
                 return
 

@@ -2,10 +2,14 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Personagem Live</title>
+<title>Mascote FatoClaro</title>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
 <style>
+  /* Paleta do mascote: troque aqui para combinar com o canal */
+  :root { --tinta: #1b1b1b; --moletom: #ffcf33; --alerta: #e63946; --certo: #2a9d8f;
+          --bermuda: #3b4a5a; --pele: #c98b5e; --papel: #fffdf6; }
   html, body { margin: 0; height: 100%; background: transparent; overflow: hidden;
-               font-family: "Segoe UI", Arial, sans-serif; }
+               font-family: "Gochi Hand", "Comic Sans MS", cursive; }
   body.verde { background: #00ff00; } /* ?fundo=verde para chroma key */
 
   #palco { position: fixed; right: 30px; bottom: 30px; width: 420px; height: 560px; }
@@ -13,21 +17,23 @@
   /* ---------- balão de fala ---------- */
   #balao {
     position: absolute; left: 10px; right: 10px; top: 0; min-height: 60px;
-    background: #fff; color: #161823; border-radius: 22px; padding: 16px 20px;
-    font-size: 24px; font-weight: 700; line-height: 1.25; text-align: center;
-    box-shadow: 0 8px 24px rgba(0,0,0,.3); border: 4px solid #161823;
+    background: var(--papel); color: var(--tinta); border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+    padding: 16px 22px; font-size: 30px; line-height: 1.15; text-align: center;
+    box-shadow: 5px 6px 0 var(--tinta); border: 4px solid var(--tinta);
     opacity: 0; transform: scale(.6); transform-origin: 50% 100%;
     transition: opacity .2s, transform .25s cubic-bezier(.3,1.6,.6,1);
   }
   #balao::after { content: ""; position: absolute; left: 50%; bottom: -22px; margin-left: -14px;
-    border: 14px solid transparent; border-top: 18px solid #161823; }
+    border: 14px solid transparent; border-top: 18px solid var(--tinta); }
   #balao.on { opacity: 1; transform: scale(1); }
-  #balao.presente { background: #fff2f5; border-color: #fe2c55; }
+  #balao.presente { background: #fff6d6; }
+  #balao::before { content: "FATOCLARO"; position: absolute; top: -16px; left: 18px; background: var(--moletom);
+    border: 3px solid var(--tinta); padding: 0 8px; font-size: 16px; letter-spacing: 1px; transform: rotate(-3deg); }
 
   /* ---------- personagem ---------- */
   #boneco { position: absolute; left: 50%; bottom: 0; width: 300px; margin-left: -150px;
             transform-origin: 50% 100%; }
-  #corpo { animation: respira 2.6s ease-in-out infinite; transform-origin: 150px 330px; }
+  #corpo { animation: respira 2.6s ease-in-out infinite; transform-origin: 150px 360px; }
   @keyframes respira { 50% { transform: scale(1.02, .98); } }
 
   .olho { animation: pisca 4.2s infinite; transform-box: fill-box; transform-origin: center; }
@@ -73,33 +79,60 @@
 <body>
 <div id="palco">
   <div id="balao"></div>
-  <svg id="boneco" viewBox="0 0 300 360" aria-label="personagem">
-    <g id="corpo">
-      <!-- sombra -->
-      <ellipse cx="150" cy="350" rx="95" ry="10" fill="rgba(0,0,0,.25)"/>
-      <!-- antena -->
-      <line x1="150" y1="78" x2="150" y2="40" stroke="#161823" stroke-width="7" stroke-linecap="round"/>
-      <circle cx="150" cy="34" r="14" fill="#fe2c55" stroke="#161823" stroke-width="6"/>
-      <!-- braços -->
-      <g id="bracoE"><path d="M62 210 Q30 210 22 240" stroke="#161823" stroke-width="22" fill="none" stroke-linecap="round"/>
-        <path d="M62 210 Q30 210 22 240" stroke="#25f4ee" stroke-width="12" fill="none" stroke-linecap="round"/></g>
-      <g id="bracoD"><path d="M238 210 Q270 210 278 240" stroke="#161823" stroke-width="22" fill="none" stroke-linecap="round"/>
-        <path d="M238 210 Q270 210 278 240" stroke="#25f4ee" stroke-width="12" fill="none" stroke-linecap="round"/></g>
-      <!-- pés -->
-      <rect x="95" y="315" width="42" height="30" rx="14" fill="#fe2c55" stroke="#161823" stroke-width="6"/>
-      <rect x="163" y="315" width="42" height="30" rx="14" fill="#fe2c55" stroke="#161823" stroke-width="6"/>
-      <!-- corpo -->
-      <rect x="60" y="78" width="180" height="245" rx="80" fill="#25f4ee" stroke="#161823" stroke-width="7"/>
-      <rect x="85" y="105" width="130" height="105" rx="45" fill="#fff" stroke="#161823" stroke-width="6"/>
-      <!-- olhos -->
-      <g class="olho"><ellipse cx="122" cy="150" rx="13" ry="18" fill="#161823"/><circle cx="127" cy="143" r="5" fill="#fff"/></g>
-      <g class="olho"><ellipse cx="178" cy="150" rx="13" ry="18" fill="#161823"/><circle cx="183" cy="143" r="5" fill="#fff"/></g>
-      <ellipse class="bochecha" cx="100" cy="180" rx="12" ry="7" fill="#fe2c55"/>
-      <ellipse class="bochecha" cx="200" cy="180" rx="12" ry="7" fill="#fe2c55"/>
-      <!-- boca -->
-      <path id="boca" d="M128 182 Q150 205 172 182 Z" fill="#161823"/>
-      <!-- coração na barriga -->
-      <path d="M150 268 l-20 -20 a12 12 0 0 1 20 -14 a12 12 0 0 1 20 14 z" fill="#fe2c55" stroke="#161823" stroke-width="5"/>
+  <svg id="boneco" viewBox="0 0 300 380" aria-label="Claro, mascote do FatoClaro">
+    <defs>
+      <!-- traço tremido de rabisco (estilo doodle do canal) -->
+      <filter id="rabisco" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="ruido">
+          <animate attributeName="seed" values="1;2;3;4" dur="0.5s" calcMode="discrete" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="3.5"/>
+      </filter>
+    </defs>
+    <ellipse cx="150" cy="368" rx="90" ry="9" fill="rgba(0,0,0,.22)"/>
+    <g id="corpo" filter="url(#rabisco)" stroke="var(--tinta)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- pernas e tênis -->
+      <path d="M125 285 L120 335 M175 285 L180 335" stroke-width="16"/>
+      <path d="M95 352 Q95 330 120 332 Q140 334 142 352 Z" fill="var(--alerta)"/>
+      <path d="M158 352 Q160 334 180 332 Q205 330 205 352 Z" fill="var(--alerta)"/>
+      <path d="M93 352 H144 M156 352 H207" stroke-width="7" stroke="#fff"/>
+      <path d="M93 356 H144 M156 356 H207" stroke-width="3"/>
+      <!-- bermuda -->
+      <path d="M92 250 L208 250 L214 300 L156 302 L150 278 L144 302 L86 300 Z" fill="var(--bermuda)"/>
+      <!-- braço esquerdo com a lupa -->
+      <g id="bracoE">
+        <path d="M95 182 Q62 200 58 238" fill="none" stroke-width="20"/>
+        <path d="M95 182 Q62 200 58 238" fill="none" stroke="var(--moletom)" stroke-width="10"/>
+        <circle cx="57" cy="244" r="10" fill="var(--pele)"/>
+        <path d="M57 250 L45 275" stroke-width="9"/>
+        <circle cx="38" cy="293" r="20" fill="rgba(180,230,255,.75)" stroke-width="6"/>
+        <path d="M30 286 Q34 281 40 281" stroke="#fff" stroke-width="3" fill="none"/>
+      </g>
+      <!-- braço direito (acena) -->
+      <g id="bracoD">
+        <path d="M205 182 Q238 200 242 238" fill="none" stroke-width="20"/>
+        <path d="M205 182 Q238 200 242 238" fill="none" stroke="var(--moletom)" stroke-width="10"/>
+        <circle cx="243" cy="245" r="11" fill="var(--pele)"/>
+      </g>
+      <!-- moletom -->
+      <path d="M100 165 Q150 150 200 165 L212 255 Q150 266 88 255 Z" fill="var(--moletom)"/>
+      <path d="M100 236 Q150 246 200 236" fill="none" stroke-width="4"/>
+      <!-- selo ✓ no peito -->
+      <circle cx="150" cy="205" r="22" fill="#fff"/>
+      <path d="M139 205 L147 214 L163 195" fill="none" stroke="var(--certo)" stroke-width="7"/>
+      <!-- capuz atrás da cabeça -->
+      <path d="M78 112 Q80 40 150 38 Q220 40 222 112 Q224 160 150 168 Q76 160 78 112 Z" fill="var(--moletom)"/>
+      <!-- cordões -->
+      <path d="M132 165 L128 188 M168 165 L172 188" stroke-width="3"/>
+      <!-- rosto -->
+      <ellipse cx="150" cy="110" rx="55" ry="52" fill="var(--pele)"/>
+      <path d="M100 82 Q120 60 150 64 Q182 60 200 82 Q175 74 150 78 Q122 74 100 82 Z" fill="var(--tinta)"/>
+      <path d="M115 92 Q126 86 136 91 M164 91 Q174 86 185 92" fill="none" stroke-width="4"/>
+      <g class="olho"><ellipse cx="127" cy="108" rx="9" ry="12" fill="var(--tinta)" stroke="none"/><circle cx="130" cy="104" r="3.5" fill="#fff" stroke="none"/></g>
+      <g class="olho"><ellipse cx="173" cy="108" rx="9" ry="12" fill="var(--tinta)" stroke="none"/><circle cx="176" cy="104" r="3.5" fill="#fff" stroke="none"/></g>
+      <ellipse class="bochecha" cx="110" cy="128" rx="10" ry="6" fill="var(--alerta)" stroke="none"/>
+      <ellipse class="bochecha" cx="190" cy="128" rx="10" ry="6" fill="var(--alerta)" stroke="none"/>
+      <path id="boca" d="M134 132 Q150 150 166 132 Z" fill="var(--tinta)" stroke-width="3"/>
     </g>
   </svg>
 </div>
@@ -109,7 +142,7 @@
   const reacoes = {
     entrou:       { anim: "acenando",    feliz: false, part: "👋", n: 3 },
     presente:     { anim: "pulando",     feliz: true,  part: "confete", n: 60 },
-    seguiu:       { anim: "girando",     feliz: true,  part: "⭐", n: 14 },
+    seguiu:       { anim: "girando",     feliz: true,  part: "✅", n: 14 },
     compartilhou: { anim: "balancando",  feliz: true,  part: "🔁", n: 6 },
     curtiu:       { anim: "comemorando", feliz: true,  part: "❤️", n: 18 },
     comentario:   { anim: "",            feliz: false, part: "💬", n: 2 },
@@ -129,7 +162,7 @@
   let fila = [], ocupado = false, ultimo = 0;
 
   function particulas(tipo, n) {
-    const cores = ["#fe2c55", "#25f4ee", "#ffd23f", "#7cff6b", "#ffffff"];
+    const cores = ["#ffcf33", "#e63946", "#2a9d8f", "#1b1b1b", "#ffffff"];
     for (let i = 0; i < n; i++) {
       const p = document.createElement("div");
       p.className = "part" + (tipo === "confete" ? " confete" : "");

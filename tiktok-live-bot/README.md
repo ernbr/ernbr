@@ -67,13 +67,16 @@ No **TikTok LIVE Studio** ou **OBS**: adicione uma fonte **Navegador / Link**
 com o endereço `http://localhost:8765`, tamanho 1080x1920. O fundo é
 transparente; os cartões aparecem no canto inferior esquerdo.
 
-### 🤖 Personagem animado
+### 🤖 Personagem animado (mascote do FatoClaro)
 Adicione outra fonte **Navegador** com `http://localhost:8765/personagem`.
-Um boneco fica no canto inferior direito e reage a cada evento com um balão de fala:
+O mascote é um herói de moletom com lupa e um ✓ no peito, desenhado no estilo
+de rabisco (doodle) dos vídeos do canal. Ele fica no canto inferior direito e
+reage a cada evento com um balão de fala:
 acena para quem entra, pula e solta confete com presente, gira com novo seguidor,
 dança com curtidas e mexe a boca enquanto "fala".
 - `?fundo=verde` → fundo verde para chroma key (se o programa não aceitar transparência).
 - `?entradas=nao` → não reage a quem entra (live cheia).
+- Cores: mude as variáveis no topo de `personagem.html` (`--moletom`, `--alerta`, `--certo`, `--pele`...).
 
 ### 🎙️ Voz do bot direto na live (sem passar pelo microfone)
 No **TikTok LIVE Studio** ou **OBS**, adicione uma fonte de **áudio do sistema /
