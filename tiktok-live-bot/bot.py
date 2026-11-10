@@ -15,6 +15,8 @@ import argparse
 import json
 import queue
 import random
+import shutil
+import subprocess
 import threading
 import time
 from collections import deque
@@ -58,6 +60,12 @@ class Voz:
             self.fila.put(texto)
 
     def _loop(self):
+        # Celular Android (Termux): usa a voz do próprio Android
+        if shutil.which("termux-tts-speak"):
+            print("[voz] usando a voz do Android (Termux:API)")
+            while True:
+                texto = self.fila.get()
+                subprocess.run(["termux-tts-speak", "-l", "pt", "-n", "BR", texto])
         try:
             import pyttsx3
         except ImportError:

@@ -30,6 +30,38 @@ um overlay animado.
    python bot.py @seu_usuario
    ```
 
+## 📱 Rodar no celular (Android)
+
+Dá para fazer a live pelo app do TikTok e deixar o bot rodando no mesmo
+celular, falando os agradecimentos pelo alto-falante.
+
+1. Instale pela **F-Droid** (não pela Play Store, que tem versão velha):
+   **Termux** e **Termux:API**.
+2. Abra o Termux e rode (demora uns minutos na primeira vez):
+   ```bash
+   pkg update -y
+   pkg install -y python git rust termux-api
+   pip install "setuptools<70" wheel
+   pip install --no-build-isolation protobuf3-to-dict
+   pip install TikTokLive
+   git clone -b claude/tiktok-live-interativa-5m8vbk https://github.com/ernbr/ernbr
+   cd ernbr/tiktok-live-bot
+   ```
+3. Teste a voz: `python bot.py --simular` (Ctrl+C para parar).
+4. Para o Android não matar o bot em segundo plano: puxe a notificação do
+   Termux e toque em **Acquire wakelock**. Nas configurações do Android,
+   tire o Termux da **otimização de bateria**.
+5. Abra a live no app do TikTok. Com ela já no ar, volte ao Termux e rode
+   `python bot.py @seu_usuario`, depois volte para o TikTok.
+
+Dicas para o celular:
+- Deixe o volume de mídia alto: o microfone da live capta a voz do bot.
+  Fone de ouvido **não** serve, porque aí só você escuta.
+- O overlay na tela não funciona na live pelo app do celular. Só a voz.
+- Em live cheia, desligue `FALAR_ENTRADAS` em `bot.py` para o bot não falar sem parar.
+- **iPhone não funciona**: o iOS não deixa rodar esse tipo de programa em
+  segundo plano. Nesse caso, rode no PC.
+
 ### Mostrar os agradecimentos na tela da live
 No **TikTok LIVE Studio** ou **OBS**: adicione uma fonte **Navegador / Link**
 com o endereço `http://localhost:8765`, tamanho 1080x1920. O fundo é
