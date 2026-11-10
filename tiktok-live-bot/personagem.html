@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Mascote FatoClaro</title>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+<style>
+  /* Paleta do mascote: troque aqui para combinar com o canal */
+  :root { --tinta: #1b1b1b; --moletom: #ffcf33; --alerta: #e63946; --certo: #2a9d8f;
+          --bermuda: #3b4a5a; --pele: #c98b5e; --papel: #fffdf6; }
+  html, body { margin: 0; height: 100%; background: transparent; overflow: hidden;
+               font-family: "Gochi Hand", "Comic Sans MS", cursive; }
+  body.verde { background: #00ff00; } /* ?fundo=verde para chroma key */
+
+  #palco { position: fixed; right: 30px; bottom: 30px; width: 420px; height: 560px; }
+
+  /* ---------- balão de fala ---------- */
+  #balao {
+    position: absolute; left: 10px; right: 10px; top: 0; min-height: 60px;
+    background: var(--papel); color: var(--tinta); border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+    padding: 16px 22px; font-size: 30px; line-height: 1.15; text-align: center;
+    box-shadow: 5px 6px 0 var(--tinta); border: 4px solid var(--tinta);
+    opacity: 0; transform: scale(.6); transform-origin: 50% 100%;
+    transition: opacity .2s, transform .25s cubic-bezier(.3,1.6,.6,1);
+  }
+  #balao::after { content: ""; position: absolute; left: 50%; bottom: -22px; margin-left: -14px;
+    border: 14px solid transparent; border-top: 18px solid var(--tinta); }
+  #balao.on { opacity: 1; transform: scale(1); }
+  #balao.presente { background: #fff6d6; }
+  #balao::before { content: "FATOCLARO"; position: absolute; top: -16px; left: 18px; background: var(--moletom);
+    border: 3px solid var(--tinta); padding: 0 8px; font-size: 16px; letter-spacing: 1px; transform: rotate(-3deg); }
+
+  /* ---------- personagem ---------- */
+  #boneco { position: absolute; left: 50%; bottom: 0; width: 300px; margin-left: -150px;
+            transform-origin: 50% 100%; }
+  #corpo { animation: respira 2.6s ease-in-out infinite; transform-origin: 150px 360px; }
+  @keyframes respira { 50% { transform: scale(1.02, .98); } }
+
+  .olho { animation: pisca 4.2s infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes pisca { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+
+  #boca { transform-box: fill-box; transform-origin: center; }
+  .falando #boca { animation: fala .18s ease-in-out infinite alternate; }
+  @keyframes fala { from { transform: scaleY(.25); } to { transform: scaleY(1.1); } }
+
+  #bracoD, #bracoE { transform-box: fill-box; }
+  #bracoD { transform-origin: 0% 50%; }
+  #bracoE { transform-origin: 100% 50%; }
+  .acenando #bracoD { animation: aceno .35s ease-in-out 6 alternate; }
+  @keyframes aceno { from { transform: rotate(-20deg); } to { transform: rotate(-75deg); } }
+
+  .pulando { animation: pulo .5s cubic-bezier(.3,0,.5,1) 4; }
+  @keyframes pulo { 0%,100% { transform: translateY(0) scale(1,1); }
+                    15% { transform: translateY(0) scale(1.1,.88); }
+                    50% { transform: translateY(-90px) scale(.95,1.06); } }
+  .pulando #bracoD, .pulando #bracoE, .comemorando #bracoD, .comemorando #bracoE {
+    animation: bracosCima .25s ease-in-out infinite alternate; }
+  @keyframes bracosCima { from { transform: rotate(-60deg); } to { transform: rotate(-100deg); } }
+  .pulando #bracoE, .comemorando #bracoE { animation-name: bracosCimaE; }
+  @keyframes bracosCimaE { from { transform: rotate(60deg); } to { transform: rotate(100deg); } }
+
+  .girando { animation: gira .9s ease-in-out 2; }
+  @keyframes gira { 50% { transform: translateY(-40px) rotate(180deg); } 100% { transform: rotate(360deg); } }
+
+  .comemorando { animation: danca .3s ease-in-out 10 alternate; }
+  @keyframes danca { from { transform: rotate(-8deg); } to { transform: rotate(8deg) translateY(-12px); } }
+
+  .balancando { animation: balanca .4s ease-in-out 6 alternate; }
+  @keyframes balanca { from { transform: translateX(-15px) rotate(-4deg); } to { transform: translateX(15px) rotate(4deg); } }
+
+  .bochecha { opacity: .0; transition: opacity .3s; }
+  .feliz .bochecha { opacity: .7; }
+
+  /* ---------- partículas ---------- */
+  .part { position: absolute; pointer-events: none; font-size: 34px; will-change: transform, opacity; }
+  .confete { width: 12px; height: 18px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div id="balao"></div>
+  <svg id="boneco" viewBox="0 0 300 380" aria-label="Claro, mascote do FatoClaro">
+    <defs>
+      <!-- traço tremido de rabisco (estilo doodle do canal) -->
+      <filter id="rabisco" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="ruido">
+          <animate attributeName="seed" values="1;2;3;4" dur="0.5s" calcMode="discrete" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="3.5"/>
+      </filter>
+    </defs>
+    <ellipse cx="150" cy="368" rx="90" ry="9" fill="rgba(0,0,0,.22)"/>
+    <g id="corpo" filter="url(#rabisco)" stroke="var(--tinta)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- pernas e tênis -->
+      <path d="M125 285 L120 335 M175 285 L180 335" stroke-width="16"/>
+      <path d="M95 352 Q95 330 120 332 Q140 334 142 352 Z" fill="var(--alerta)"/>
+      <path d="M158 352 Q160 334 180 332 Q205 330 205 352 Z" fill="var(--alerta)"/>
+      <path d="M93 352 H144 M156 352 H207" stroke-width="7" stroke="#fff"/>
+      <path d="M93 356 H144 M156 356 H207" stroke-width="3"/>
+      <!-- bermuda -->
+      <path d="M92 250 L208 250 L214 300 L156 302 L150 278 L144 302 L86 300 Z" fill="var(--bermuda)"/>
+      <!-- braço esquerdo com a lupa -->
+      <g id="bracoE">
+        <path d="M95 182 Q62 200 58 238" fill="none" stroke-width="20"/>
+        <path d="M95 182 Q62 200 58 238" fill="none" stroke="var(--moletom)" stroke-width="10"/>
+        <circle cx="57" cy="244" r="10" fill="var(--pele)"/>
+        <path d="M57 250 L45 275" stroke-width="9"/>
+        <circle cx="38" cy="293" r="20" fill="rgba(180,230,255,.75)" stroke-width="6"/>
+        <path d="M30 286 Q34 281 40 281" stroke="#fff" stroke-width="3" fill="none"/>
+      </g>
+      <!-- braço direito (acena) -->
+      <g id="bracoD">
+        <path d="M205 182 Q238 200 242 238" fill="none" stroke-width="20"/>
+        <path d="M205 182 Q238 200 242 238" fill="none" stroke="var(--moletom)" stroke-width="10"/>
+        <circle cx="243" cy="245" r="11" fill="var(--pele)"/>
+      </g>
+      <!-- moletom -->
+      <path d="M100 165 Q150 150 200 165 L212 255 Q150 266 88 255 Z" fill="var(--moletom)"/>
+      <path d="M100 236 Q150 246 200 236" fill="none" stroke-width="4"/>
+      <!-- selo ✓ no peito -->
+      <circle cx="150" cy="205" r="22" fill="#fff"/>
+      <path d="M139 205 L147 214 L163 195" fill="none" stroke="var(--certo)" stroke-width="7"/>
+      <!-- capuz atrás da cabeça -->
+      <path d="M78 112 Q80 40 150 38 Q220 40 222 112 Q224 160 150 168 Q76 160 78 112 Z" fill="var(--moletom)"/>
+      <!-- cordões -->
+      <path d="M132 165 L128 188 M168 165 L172 188" stroke-width="3"/>
+      <!-- rosto -->
+      <ellipse cx="150" cy="110" rx="55" ry="52" fill="var(--pele)"/>
+      <path d="M100 82 Q120 60 150 64 Q182 60 200 82 Q175 74 150 78 Q122 74 100 82 Z" fill="var(--tinta)"/>
+      <path d="M115 92 Q126 86 136 91 M164 91 Q174 86 185 92" fill="none" stroke-width="4"/>
+      <g class="olho"><ellipse cx="127" cy="108" rx="9" ry="12" fill="var(--tinta)" stroke="none"/><circle cx="130" cy="104" r="3.5" fill="#fff" stroke="none"/></g>
+      <g class="olho"><ellipse cx="173" cy="108" rx="9" ry="12" fill="var(--tinta)" stroke="none"/><circle cx="176" cy="104" r="3.5" fill="#fff" stroke="none"/></g>
+      <ellipse class="bochecha" cx="110" cy="128" rx="10" ry="6" fill="var(--alerta)" stroke="none"/>
+      <ellipse class="bochecha" cx="190" cy="128" rx="10" ry="6" fill="var(--alerta)" stroke="none"/>
+      <path id="boca" d="M134 132 Q150 150 166 132 Z" fill="var(--tinta)" stroke-width="3"/>
+    </g>
+  </svg>
+</div>
+
+<script>
+  // Cada tipo de evento vira uma reação do personagem.
+  const reacoes = {
+    entrou:       { anim: "acenando",    feliz: false, part: "👋", n: 3 },
+    presente:     { anim: "pulando",     feliz: true,  part: "confete", n: 60 },
+    seguiu:       { anim: "girando",     feliz: true,  part: "✅", n: 14 },
+    compartilhou: { anim: "balancando",  feliz: true,  part: "🔁", n: 6 },
+    curtiu:       { anim: "comemorando", feliz: true,  part: "❤️", n: 18 },
+    comentario:   { anim: "",            feliz: false, part: "💬", n: 2 },
+    sistema:      { anim: "acenando",    feliz: true,  part: "✨", n: 10 },
+  };
+  const animClasses = ["acenando", "pulando", "girando", "comemorando", "balancando"];
+
+  const params = new URLSearchParams(location.search);
+  if (params.get("fundo") === "verde") document.body.classList.add("verde");
+  // ?entradas=nao -> não reage a quem entra (live cheia)
+  const ignorarEntradas = params.get("entradas") === "nao";
+
+  const palco = document.getElementById("palco");
+  const boneco = document.getElementById("boneco");
+  const balao = document.getElementById("balao");
+
+  let fila = [], ocupado = false, ultimo = 0;
+
+  function particulas(tipo, n) {
+    const cores = ["#ffcf33", "#e63946", "#2a9d8f", "#1b1b1b", "#ffffff"];
+    for (let i = 0; i < n; i++) {
+      const p = document.createElement("div");
+      p.className = "part" + (tipo === "confete" ? " confete" : "");
+      if (tipo === "confete") p.style.background = cores[i % cores.length];
+      else p.textContent = tipo;
+      p.style.left = 210 + (Math.random() - .5) * 120 + "px";
+      p.style.top = 330 + "px";
+      palco.append(p);
+      const dx = (Math.random() - .5) * 520, dy = -200 - Math.random() * 330;
+      const rot = (Math.random() - .5) * 720;
+      p.animate([
+        { transform: "translate(0,0) rotate(0)", opacity: 1 },
+        { transform: `translate(${dx}px, ${dy}px) rotate(${rot}deg)`, opacity: 1, offset: .6 },
+        { transform: `translate(${dx * 1.2}px, ${dy + 260}px) rotate(${rot * 1.5}deg)`, opacity: 0 },
+      ], { duration: 1800 + Math.random() * 900, easing: "cubic-bezier(.2,.7,.4,1)", delay: Math.random() * 300 })
+        .onfinish = () => p.remove();
+    }
+  }
+
+  function reagir(ev) {
+    const r = reacoes[ev.tipo] || reacoes.comentario;
+    ocupado = true;
+    // duração ~ tempo que a voz leva para ler o texto
+    const dur = Math.min(7000, Math.max(2200, ev.texto.length * 75));
+
+    balao.textContent = ev.texto;
+    balao.className = "on " + ev.tipo;
+    boneco.classList.remove(...animClasses);
+    void boneco.offsetWidth; // reinicia a animação
+    if (r.anim) boneco.classList.add(r.anim);
+    boneco.classList.add("falando");
+    boneco.classList.toggle("feliz", r.feliz);
+    particulas(r.part, r.n);
+
+    setTimeout(() => {
+      boneco.classList.remove("falando", "feliz", ...animClasses);
+      balao.className = "";
+      setTimeout(() => { ocupado = false; proximo(); }, 350);
+    }, dur);
+  }
+
+  function proximo() {
+    if (ocupado || !fila.length) return;
+    // presentes e seguidores furam a fila
+    let i = fila.findIndex(e => e.tipo === "presente" || e.tipo === "seguiu");
+    if (i < 0) i = 0;
+    const [ev] = fila.splice(i, 1);
+    reagir(ev);
+  }
+
+  async function buscar() {
+    try {
+      const r = await fetch("/eventos?desde=" + ultimo);
+      for (const ev of await r.json()) {
+        ultimo = Math.max(ultimo, ev.id);
+        if (ignorarEntradas && ev.tipo === "entrou") continue;
+        fila.push(ev);
+      }
+      // fila muito grande: descarta as entradas mais antigas
+      while (fila.length > 8) {
+        const j = fila.findIndex(e => e.tipo === "entrou" || e.tipo === "curtiu");
+        fila.splice(j < 0 ? 0 : j, 1);
+      }
+      proximo();
+    } catch (e) {}
+    setTimeout(buscar, 600);
+  }
+  buscar();
+</script>
+</body>
+</html>

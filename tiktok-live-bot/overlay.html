@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Overlay Live</title>
+<style>
+  html, body { margin: 0; background: transparent; font-family: "Segoe UI", Arial, sans-serif; overflow: hidden; }
+  #lista { position: fixed; left: 20px; bottom: 20px; width: 460px; display: flex; flex-direction: column; gap: 10px; }
+  .card {
+    padding: 14px 18px; border-radius: 14px; color: #fff; font-size: 22px; font-weight: 600;
+    background: rgba(20, 20, 30, .82); border-left: 6px solid #25f4ee;
+    box-shadow: 0 6px 20px rgba(0,0,0,.35);
+    animation: entra .4s ease-out, sai .6s ease-in 7.4s forwards;
+  }
+  .card .ico { margin-right: 8px; }
+  .presente { border-left-color: #fe2c55; background: rgba(60, 10, 25, .9); font-size: 26px; }
+  .seguiu { border-left-color: #ffd23f; }
+  .compartilhou { border-left-color: #7cff6b; }
+  .curtiu { border-left-color: #ff7ab8; }
+  .sistema { border-left-color: #999; font-size: 18px; }
+  @keyframes entra { from { transform: translateX(-120%); opacity: 0 } to { transform: none; opacity: 1 } }
+  @keyframes sai { to { opacity: 0; transform: translateY(10px) } }
+</style>
+</head>
+<body>
+<div id="lista"></div>
+<script>
+  const icones = { entrou: "👋", presente: "🎁", seguiu: "⭐", compartilhou: "🔁", curtiu: "❤️", comentario: "💬", sistema: "🤖" };
+  const lista = document.getElementById("lista");
+  let ultimo = 0;
+
+  function mostrar(ev) {
+    const d = document.createElement("div");
+    d.className = "card " + ev.tipo;
+    const i = document.createElement("span");
+    i.className = "ico";
+    i.textContent = icones[ev.tipo] || "✨";
+    d.append(i, document.createTextNode(ev.texto));
+    lista.append(d);
+    while (lista.children.length > 5) lista.firstChild.remove();
+    setTimeout(() => d.remove(), 8000);
+  }
+
+  async function buscar() {
+    try {
+      const r = await fetch("/eventos?desde=" + ultimo);
+      const evs = await r.json();
+      for (const ev of evs) { ultimo = Math.max(ultimo, ev.id); mostrar(ev); }
+    } catch (e) {}
+    setTimeout(buscar, 700);
+  }
+  buscar();
+</script>
+</body>
+</html>
